@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <style>
+      img{
+        width:200px;
+        height:200px;
+      }
+
+
+    
+    </style>
+
+  </head>
+  <body>
+
+    <div id='slideshow'>
+      <a href='#' id="prev"><<</a>
+      <img src="" alt="whoops" id='im'>
+
+      <a href="#" id='next'>>></a>
+    </div>
+
+    <div>
+      <div id='modal'>
+        <div id=modal-content>
+          <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo impedit, libero illum iure debitis, doloribus voluptatem omnis, voluptatibus repellendus quas porro quae ratione fugiat harum, veniam odit reprehenderit. Sint, tempore.</h3>
+
+        </div>
+
+      </div>
+      <button id='btn'>
+        modal
+      </button>
+    </div>
+
+
+
+
+
+
+
+    <script>
+
+
+
+var images =
+      [
+        "/home/pmk00/Pictures/Wallpapers/calmwater.jpg",
+        "/home/pmk00/Pictures/Wallpapers/ofeu08qj0ww-paul-morris.jpg",
+        "/home/pmk00/Pictures/Wallpapers/raindrop-1587994_960_720.jpg",
+        '/home/pmk00/Pictures/Wallpapers/bob-canning-58962.jpg'
+      ]
+  var previous = document.getElementById('prev');
+  var next2 = document.getElementById('next');
+  var im = document.getElementById('im');
+  var current = 0;
+  var prev = current--;
+  var next = current++;
+  im.src = images[current];
+
+previous.addEventListener('mousedown',prev1);
+next2.addEventListener('mousedown',next1);
+
+function prev1(){
+    if(current === 0){
+      current = images.length-1;
+      im.src = images[current];
+
+    }
+     else if(current!==0){
+      current -= 1;
+      im.src = images[current];
+
+    }
+
+  }
+
+
+  function next1(){
+      if(current === (images.length-1)){
+
+        current = 0;
+        im.src = images[current];
+
+      }
+
+
+      else if(current < (images.length-1)){
+
+        console.log(current)
+        current +=1
+        im.src = images[current];
+        console.log(current);
+      }
+
+    }
+
+setInterval(function(){
+              next1();
+            },3000);
+
+
+
+
+
+
+    </script>
+  </body>
+
+</html>
