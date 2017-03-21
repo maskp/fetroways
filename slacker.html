@@ -1,0 +1,133 @@
+<!Doctype html>
+ <html>
+ <head>
+ <script src="https://unpkg.com/vue/dist/vue.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lemonada" rel="stylesheet">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <style>li{list-style:none}
+          body{background:url('http://www.pixelstalk.net/wp-content/uploads/2016/07/HD-Peaceful-Image.jpg') no-repeat; background-size:100%;height:100vh;font-family: 'Lemonada', cursive;}
+          #id{
+            background:darkgray;opacity:.7;}
+            #dd{background:darkgray;opacity:.7;}
+            button{
+              background: darkgreen;
+              color: white;
+            }
+
+ </style>
+ </head>
+ <body>
+
+   <div id="app">
+
+      <p>Hey Slacker {{username}},</p>
+     <h1>Inspire a Slacker</h1>
+      <button @click="tweetit()">Tweet it B</button>
+     <button v-on:click="getQuote()">Get inspired</button>
+
+      <button @click="storequotes()">store</button>
+<input v-if="cinput" v-model="myStorage" />
+ <button v-if="cinput" @click="getLikes()">username</button>
+
+
+
+
+ <!--custom component-->
+   <my-quote message="For the Slackers, By the slackers, Of the slacker"></my-quote>
+
+
+<div id="dd">
+      <ul v-if="cstore">Quotes
+        <li v-for="(items,index) in storequote">{{items.text}}</li>
+
+      </ul>
+
+      <ol v-if="cstore">Authors
+        <li v-for="item in storequote">{{item.author}}</li>
+
+      </ol>
+</div>
+
+
+   <div id="id" v-if="cquotes">
+   <h2 v-if="cquotes">{{quote}}</h2>
+      <h3 v-if="cquotes">{{author}}</h3><br>
+   </div>
+
+
+   </div>
+ <script>
+
+
+Vue.component('my-quote',{//child component
+  props:['message'], //props are an array
+  template:'<div> {{message }} </div>'
+})
+
+
+
+ var app = new Vue({
+   el:'#app',
+       data: {
+         quote:'',
+         myStorage:'',
+         username:'',
+         author:'',
+	        likes:0,
+			cquotes:false,
+			cauthor:false,
+			cstore:false,
+	        cinput:true,
+
+
+         storequote:[{text:'',author:''}]
+              },
+      methods: {
+           getQuote: function () {
+             var that = this
+             $.ajax({
+               url:'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?',
+               crossDomain:true,
+               dataType:'jsonp',
+               success:function(data){
+                 that.quote = data.quoteText
+                 that.author = data.quoteAuthor
+                 that.cquotes = true
+                 that.cstore=false
+               }//ends success
+             })//ends ajax
+           },//ends getquote
+         getLikes: function () {
+         	var myStorage = window.localStorage.setItem('user',this.myStorage)
+           this.username = localStorage.getItem('user')
+           this.cinput=false;
+
+
+
+
+          },//ends getlikes
+
+          storequotes: function () {
+
+
+            this.storequote.push({text:this.quote,author:this.author})
+            this.cstore=true
+            this.cquotes=false
+
+          },//ends storequote
+          tweetit: function () {
+          window.open("https://twitter.com/intent/tweet?text="+ this.quote +'-'+ this.author);
+
+        },
+       deleteQuote: function(items) {
+            Vue.delete(this.storequote, items);
+}
+
+
+
+         }//ends method
+
+})//ends Vue
+       </script>
+       </body>
+       </html>

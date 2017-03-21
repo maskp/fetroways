@@ -1,0 +1,51 @@
+*{
+	margin:0px;
+	padding:0;
+	border:0;
+}
+
+h1{
+	text-align: center;
+	font-size: 575%;
+	color:#4A4444;
+	text-transform: uppercase;
+	letter-spacing: 1%;
+	margin-top:45%;
+}
+
+h2{
+	text-align: center;
+	font-size: 575%;
+	color:#e5e5e5;
+	text-transform: uppercase;
+	letter-spacing: 1%;
+	
+}
+
+.parallax{
+	background:url('http://www.well-beingsecrets.com/wp-content/uploads/Carrots-Prevent-Heart-Disease.jpg') no-repeat fixed 100%;
+	
+	background-position: center;
+	/*background:url('http://www.w3newbie.com/wp-content/uploads/parallax-2.jpg') repeat fixed 100%;*/
+}
+
+.parallax-inner{
+	padding-top: 18%;
+	padding-bottom: 10%;
+}
+
+
+#parallax2{
+	background:url('https://thumbs.dreamstime.com/z/portrait-bunny-girl-carrot-65933002.jpg') no-repeat fixed 100%;
+	background-position:center;
+}
+
+.parallax2-inner{
+	padding-top:18%;
+	padding-bottom:10%;
+	
+}
+
+.parallax2-inner h2{
+	color:gray;
+}
